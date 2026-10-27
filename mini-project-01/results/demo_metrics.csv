@@ -1,0 +1,2 @@
+model,n_neighbors,accuracy
+KNN,3,0.9556
