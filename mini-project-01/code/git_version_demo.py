@@ -33,7 +33,7 @@ def main():
     accuracy = accuracy_score(y_test, y_pred)
 
     # 이 파일이 있는 code/ 폴더의 형제 폴더 results/에 저장
-    results_dir = Path(__file__).resolve().parent.parent / "results"
+    results_dir = Path(__file__).resolve().parent.parent / "resultx"
     results_dir.mkdir(parents=True, exist_ok=True)
     csv_path = results_dir / "demo_metrics.csv"
 
