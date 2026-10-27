@@ -14,7 +14,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 # Git Diff 실습: 3을 5로 바꾼 뒤 다시 실행하고 Commit해 보세요.
-n_neighbors = 3
+n_neighbors = 5
 
 
 def main():
@@ -33,7 +33,7 @@ def main():
     accuracy = accuracy_score(y_test, y_pred)
 
     # 이 파일이 있는 code/ 폴더의 형제 폴더 results/에 저장
-    results_dir = Path(__file__).resolve().parent.parent / "resultx"
+    results_dir = Path(__file__).resolve().parent.parent / "results"
     results_dir.mkdir(parents=True, exist_ok=True)
     csv_path = results_dir / "demo_metrics.csv"
 
