@@ -9,23 +9,23 @@
 
 - **주 평가 지표:** MAE
 - **보조 지표:** RMSE, R²
-- **모델 비교에 사용한 데이터:** ___
-- **MAE를 주요 지표로 선택한 이유:** ___
+- **모델 비교에 사용한 데이터:** Validation
+- **MAE를 주요 지표로 선택한 이유:** 타깃 `cnt`와 같은 단위(대여 건수)로 “평균적으로 몇 대 틀리는지”를 바로 읽을 수 있다. `cnt`는 우측 치우침·출퇴근 피크가 있어 RMSE는 소수 큰 오차에 과도하게 휘둘리기 쉽고, R²는 수준 차이가 큰 구간 비교에 덜 직관적이라 보조로만 둔다.
 
 ## 2. 모델별 실험 결과 (CP-04~CP-06)
 
 대표 설정별 Train MAE / Validation MAE를 기록합니다. 전체 실험 결과는 Notebook의 `results_df`에서 확인합니다.
 
-- **DummyRegressor (mean):** Train ___ / Validation ___
-- **LinearRegression:** Train ___ / Validation ___
-- **DecisionTreeRegressor (`max_depth=___`):** Train ___ / Validation ___
-- **RandomForestRegressor (설정 ___):** Train ___ / Validation ___
+- **DummyRegressor (mean):** Train 119.572 / Validation 194.109
+- **LinearRegression:** Train 55.382 / Validation 99.725
+- **DecisionTreeRegressor (`max_depth=12`):** Train 32.966 / Validation 79.959
+- **RandomForestRegressor (설정 B: n_estimators=100, max_depth=15):** Train 22.255 / Validation 64.517
 
 **실험에서 발견한 점**
 
-- **Decision Tree 깊이 변화에 따른 성능:** ___
-- **Random Forest 두 설정의 차이:** ___
-- **Train·Validation 성능 차이에서 관찰한 현상:** ___ (`001_data_analysis`의 2절 `cnt` 평균 차이와 연결해 작성)
+- **Decision Tree 깊이 변화에 따른 성능:** 깊이 3→6→12로 Valid MAE가 134.9→106.3→80.0으로 개선되나, Train MAE는 더 빠르게 떨어져 Gap이 53.7→44.8→47.0으로 깊을수록 과대적합 위험이 커진다.
+- **Random Forest 두 설정의 차이:** B(100·15)가 A(50·10)보다 Valid MAE가 76.4→64.5로 낮아 최고 성능이다. A는 Gap이 더 작아(38.2 vs 42.3) 상대적으로 덜 과적합하지만 절대 Valid 오차는 B가 유리하다.
+- **Train·Validation 성능 차이에서 관찰한 현상:** 모든 모델에서 Valid MAE가 Train보다 크다. Valid 구간 `cnt` 평균(약 281)이 Train(약 160)보다 높아 수준·분포 이동이 있고, 여기에 모델 복잡도까지 겹치면 Gap이 더 벌어질 수 있다.
 
 ## 3. 예측 오류 분석 (CP-07)
 
