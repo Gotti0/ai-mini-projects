@@ -29,11 +29,11 @@
 
 서로 다른 회귀 모델 및 설정 중 하나를 최종 모델로 선택해야 합니다.
 
-- **비교한 모델·설정:** _(CP-04~07 실험 후 작성)_
-- **최종 선택한 모델·설정:** _(미정)_
-- **선택 근거(Validation MAE, 과대적합 가능성, 시간대별 오류 등):** _(미정)_
-- **선택 모델의 장점:** _(미정)_
-- **남아 있는 한계 또는 개선 방향:** _(미정)_
+- **비교한 모델·설정:** Dummy(mean), LinearRegression, DecisionTree(max_depth=3/6/12), RandomForest A(n_estimators=50, max_depth=10)·B(100, 15). 오류 분석 후보는 Valid MAE 상위 2개 RF_B·RF_A
+- **최종 선택한 모델·설정:** RandomForestRegressor — `n_estimators=100`, `max_depth=15`, `random_state=42`, `n_jobs=-1` (설정 B)
+- **선택 근거(Validation MAE, 과대적합 가능성, 시간대별 오류 등):** Valid MAE 64.517로 전 실험 최저(차순위 RF_A 76.379, Tree-12 79.959). Gap(42.3)은 RF_A(38.2)보다 다소 크지만 Valid 절대 오차 우위가 분명하고, 후보 비교에서도 RF_B가 일관되게 낮다. Valid `cnt` 평균이 Train보다 높아 Gap 자체는 전 모델 공통 현상이다.
+- **선택 모델의 장점:** 여러 트리 평균으로 단일 깊은 트리보다 Valid 오차·분산이 작고, 비선형·교호(시간대×날씨 등)를 선형 모델보다 잘 잡는다.
+- **남아 있는 한계 또는 개선 방향:** Train–Valid 수준 이동과 출퇴근 피크 구간의 잔차가 남아 있다. 시간 순서 CV·피크 시간 전용 보정·하이퍼파라미터 추가 탐색으로 일반화를 더 점검할 수 있다.
 
 **분석 근거:** `01_regression_model_analysis.md`
 
