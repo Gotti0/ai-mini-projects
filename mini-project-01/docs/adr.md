@@ -31,9 +31,9 @@
 
 - **비교한 모델·설정:** Dummy(mean), LinearRegression, DecisionTree(max_depth=3/6/12), RandomForest A(n_estimators=50, max_depth=10)·B(100, 15). 오류 분석 후보는 Valid MAE 상위 2개 RF_B·RF_A
 - **최종 선택한 모델·설정:** RandomForestRegressor — `n_estimators=100`, `max_depth=15`, `random_state=42`, `n_jobs=-1` (설정 B)
-- **선택 근거(Validation MAE, 과대적합 가능성, 시간대별 오류 등):** Valid MAE 64.517로 전 실험 최저(차순위 RF_A 76.379, Tree-12 79.959). Gap(42.3)은 RF_A(38.2)보다 다소 크지만 Valid 절대 오차 우위가 분명하고, 후보 비교에서도 RF_B가 일관되게 낮다. Valid `cnt` 평균이 Train보다 높아 Gap 자체는 전 모델 공통 현상이다.
+- **선택 근거(Validation MAE, 과대적합 가능성, 시간대별 오류 등):** RF_B의 Validation MAE는 64.517로, RF_A(76.379)와 DecisionTree(max_depth=12, 79.959)보다 낮았다. 검증 데이터에서 예측 오차가 가장 작았기 때문에 RF_B를 최종 모델로 선택했다.
 - **선택 모델의 장점:** 여러 트리 평균으로 단일 깊은 트리보다 Valid 오차·분산이 작고, 비선형·교호(시간대×날씨 등)를 선형 모델보다 잘 잡는다.
-- **남아 있는 한계 또는 개선 방향:** Train–Valid 수준 이동과 출퇴근 피크 구간의 잔차가 남아 있다. 시간 순서 CV·피크 시간 전용 보정·하이퍼파라미터 추가 탐색으로 일반화를 더 점검할 수 있다.
+- **남아 있는 한계 또는 개선 방향:** Train–Valid `cnt` 수준 이동으로 Gap이 남고, 저녁 피크(17~19시) 절대오차가 크다. depth=15에서 n_estimators를 늘려도 Valid 이득은 없었다. 시간 순서 CV·피크 보정은 추후 과제다.
 
 **분석 근거:** `01_regression_model_analysis.md`
 
@@ -47,10 +47,10 @@
 
 구매 세션이 전체의 약 15%뿐인 불균형 데이터이므로, Accuracy만으로 구매 클래스를 얼마나 잘 예측하는지 판단하기 어렵습니다.
 
-- **검토한 선택지:** ___ (예: Accuracy, 구매 클래스 F1, Precision, Recall)
-- **최종 선택한 주 지표와 보조 지표:** ___
-- **선택 근거(DummyClassifier와 LogisticRegression 결과, FP·FN 등):** ___
-- **감수한 한계 또는 추후 확인할 점:** ___
+- **검토한 선택지:** Accuracy, 구매 클래스 F1, Precision, Recall
+- **최종 선택한 주 지표와 보조 지표:** 주 지표 — 구매 F1 / 보조 — Precision, Recall (Accuracy는 참고만)
+- **선택 근거(DummyClassifier와 LogisticRegression 결과, FP·FN 등):** Dummy는 Valid Accuracy가 0.845인데 구매 F1은 0이다. Accuracy만 보면 안 되고, 구매를 얼마나 균형 있게 찾는지는 F1으로 본다.
+- **감수한 한계 또는 추후 확인할 점:** Logistic은 Precision 0.734로 구매라고 할 땐 조심하지만, Recall 0.367·FN 181으로 막상 구매로 맞춘 횟수는 적다. 이후 MLP·임계값에서 Recall 개선 여부를 확인한다.
 
 **분석 근거:** `02_classification_data_analysis.md`, `02_classification_model_analysis.md`
 
