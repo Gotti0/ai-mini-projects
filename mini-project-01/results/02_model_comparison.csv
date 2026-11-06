@@ -1,0 +1,5 @@
+Model,Train Accuracy,Train Precision,Train Recall,Train F1,Valid Accuracy,Valid Precision,Valid Recall,Valid F1,Gap (Train-Valid F1)
+MLP-B (weighted BCE),0.8841,0.588,0.8406,0.6919,0.8751,0.5753,0.7343,0.6452,0.0468
+MLP-A (BCE),0.9139,0.7428,0.6789,0.7094,0.8984,0.7168,0.5664,0.6328,0.0766
+LogisticRegression,0.8842,0.7467,0.3817,0.5052,0.8816,0.7343,0.3671,0.4895,0.0157
+DummyClassifier,0.8452,0.0,0.0,0.0,0.8454,0.0,0.0,0.0,0.0

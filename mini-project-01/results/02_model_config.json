@@ -1,0 +1,36 @@
+{
+  "model_name": "MLP-B (weighted BCE)",
+  "decision_threshold": 0.5,
+  "positive_class": 1,
+  "features": [
+    "Administrative",
+    "Administrative_Duration",
+    "Informational",
+    "Informational_Duration",
+    "ProductRelated",
+    "ProductRelated_Duration",
+    "BounceRates",
+    "ExitRates",
+    "PageValues",
+    "SpecialDay",
+    "Month",
+    "OperatingSystems",
+    "Browser",
+    "Region",
+    "TrafficType",
+    "VisitorType",
+    "Weekend"
+  ],
+  "network": {
+    "hidden_units": [
+      64,
+      32
+    ],
+    "dropout": 0.1
+  },
+  "training": {
+    "epochs": 17,
+    "weighted_loss": true,
+    "seed": 42
+  }
+}

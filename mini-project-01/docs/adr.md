@@ -60,10 +60,10 @@
 
 기본 손실 함수로 학습한 MLP-A와 클래스 가중 손실을 적용한 MLP-B를 비교하고, 구매 확률을 0/1로 구분하는 임계값(0.3·0.5·0.7)을 선택해야 합니다.
 
-- **검토한 선택지:** ___ (MLP-A / MLP-B의 학습 결과, 임계값 0.3·0.5·0.7)
-- **최종 선택한 MLP 설정·임계값·재학습 에포크:** ___
-- **선택 근거(Validation F1, Precision·Recall, FP·FN 및 가중 손실의 영향):** ___
-- **LogisticRegression과 비교했을 때 선택한 MLP의 특징:** ___
-- **감수한 한계 또는 추후 개선 방향:** ___
+- **검토한 선택지:** 미구매·구매 건수비로 가중 손실을 둔 MLP-B와 가중 없는 MLP-A를 비교했고, 임계값 0.3·0.5·0.7도 함께 격자 조사하였다.
+- **최종 선택한 MLP 설정·임계값·재학습 에포크:** MLP-B(weighted BCE), 임계값 0.5, 재학습 에포크 17(Valid F1 최고 에포크)
+- **선택 근거(Validation F1, Precision·Recall, FP·FN 및 가중 손실의 영향):** MLP-B·임계값 0.5의 Valid F1이 가장 높았다. 주 지표를 F1으로 둔 이유는 Accuracy만 보면 미구매를 많이 맞춰도 점수가 높아져 구매 쪽 실패(FN)가 가려지기 때문이다.
+- **LogisticRegression과 비교했을 때 선택한 MLP의 특징:** Logistic보다 Precision은 낮게 나왔지만, F1과 Recall은 더 높았다.
+- **감수한 한계 또는 추후 개선 방향:** MLP-B·0.5는 구매를 더 잡는 대신 FP가 늘어난 점을 감수한다.
 
 **분석 근거:** `02_classification_model_analysis.md`
