@@ -71,14 +71,13 @@ Jupyter Notebook을 열고 오른쪽 위 **Select Kernel → Python Environments
 
 ---
 
-# AI Mini Projects (수정 중)
+# AI Mini Projects
 
 AI 엔지니어 과정에서 진행하는 미니프로젝트의
 구현 과정과 실험 결과, 의사결정을 기록하는 저장소입니다.
 
 ## Mini Project 01
 
-- 진행 상태: 준비 중
 - 목표: AI 모델을 실험하고 결과를 분석하여
   적절한 방법을 선택하는 능력 기르기
 
@@ -86,11 +85,35 @@ AI 엔지니어 과정에서 진행하는 미니프로젝트의
 
 - [실험 코드](mini-project-01/code/)
 - [실험 결과](mini-project-01/results/)
-- [첫 번째 실험 분석](mini-project-01/docs/001_analysis.md)
+- [회귀 데이터 분석](mini-project-01/docs/01_regression_data_analysis.md)
+- [회귀 모델 실험 및 오류 분석](mini-project-01/docs/01_regression_model_analysis.md)
+- [분류 데이터 분석](mini-project-01/docs/02_classification_data_analysis.md)
+- [분류 모델 실험 및 오류 분석](mini-project-01/docs/02_classification_model_analysis.md)
 - [핵심 의사결정(ADR)](mini-project-01/docs/adr.md)
+
+## Mini Project 02
+
+- 목표: 사전학습된 모델의 성능을 직접 평가하고 실험 결과를 바탕으로 적절한 설정 또는 검색 방식을 선택하는 능력 기르기
+- 진행 방식: CV와 NLP 중 하나를 선택하여 진행
+
+### CV — YOLO 객체 탐지 모델의 성능 평가 및 최적 설정 선택
+
+- [실험 코드](mini-project-02/code/CV_YOLO26_MiniProject.ipynb)
+- [데이터 분석](mini-project-02/docs/01_cv_data_analysis.md)
+- [모델 실험 및 오류 분석](mini-project-02/docs/01_cv_model_analysis.md)
+
+### NLP — BERT 기반 한국어 의미 검색 시스템 개발 및 성능 비교
+
+- [실험 코드](mini-project-02/code/NLP_BERT_MiniProject_Student.ipynb)
+- [데이터 분석](mini-project-02/docs/02_nlp_data_analysis.md)
+- [모델 실험 및 오류 분석](mini-project-02/docs/02_nlp_model_analysis.md)
+
+### 공통 의사결정 기록
+
+- [핵심 의사결정(ADR)](mini-project-02/docs/ADR.md)
 
 ### 문서 관리 원칙
 
 - 실험별 상세 분석은 번호가 붙은 analysis 문서에 기록합니다.
-- 주요 기술적 선택과 근거는 adr.md에 요약합니다.
+- 주요 기술적 선택과 근거는 프로젝트별 ADR 문서에 요약합니다.
 - 프로젝트 결과가 완성되면 이 README에 핵심 성과를 정리합니다.
