@@ -41,7 +41,7 @@
 **분석:** 지표별 성능 차이와 예상과 달랐던 결과가 있다면 그 가능 원인을 작성합니다.  
 Validation 60문항에서 TF-IDF가 Hit@1 0.8833, Recall@3 0.9667, MRR@5 0.9167로 세 지표 모두 가장 높았고, Sentence-BERT(0.7667 / 0.8833 / 0.8208)가 2위, 일반 BERT(0.6667 / 0.8333 / 0.7589)가 가장 낮았다. Sentence-BERT는 일반 BERT 대비 Hit@1 +0.1000, Recall@3 +0.0500, MRR@5 +0.0619 향상되어 문장 유사도(NLI·STS) 학습의 효과가 확인되었으나, 딥러닝 모델이 TF-IDF를 앞설 것이라는 통념과 달리 TF-IDF가 전 지표에서 우세했다. 이는 KLUE-MRC 기반 질문과 정답 문단 사이에 고유명사·숫자·핵심 어휘 겹침(평균 0.474)이 많아 문자 2~3-gram 기반 TF-IDF가 매우 유리했고, 일반 BERT는 문장 검색용으로 학습되지 않아 Mean Pooling만으로는 코사인 유사도 변별력이 떨어졌으며, KR-SBERT 역시 짧은 문장 쌍 유사도 위주로 학습되어 짧은 질문(평균 29.2자)과 긴 문단(약 500자)의 비대칭 검색 및 세밀한 고유명사 구분에서는 TF-IDF보다 불리했을 가능성이 있기 때문으로 분석된다.
 
-> 참고 결과: `outputs/tables/cp08_validation_comparison.csv`, `outputs/figures/cp08_validation_comparison.png`
+> 참고 결과: `results/tables/cp08_validation_comparison.csv`, `results/figures/cp08_validation_comparison.png`
 
 ## 4. 검색 오류 분석 및 가설 검증 (CP-09)
 
@@ -61,7 +61,7 @@ Validation 60문항에서 TF-IDF가 Hit@1 0.8833, Recall@3 0.9667, MRR@5 0.9167�
 **가설 검증:** `02_nlp_data_analysis.md`의 4절에서 세운 두 가설이 실제 결과와 일치했는지, 검색 순위와 문서 내용에 근거하여 작성합니다.  
 가설 ①(본문 표현을 그대로 쓴 높은 겹침 질문에서 TF-IDF가 유리하다)은 평균 겹침 비율이 0.474로 높은 본 데이터셋에서 TF-IDF가 Hit@1 0.8833, Recall@3 0.9667, MRR@5 0.9167로 세 모델 중 가장 높은 성능을 기록하며 명확히 확인되었다. 반면 가설 ②(바꿔 물어본 낮은 겹침 질문에서 BERT 계열이 유리하다)는 부분적으로만 일치했다. 문장 유사도 학습을 거친 Sentence-BERT는 실제로 저겹침 질문(QV018, QV035)에서 TF-IDF의 약점을 보완하며 1위를 기록했지만, 일반 BERT(`klue/bert-base`)는 검색용으로 학습되지 않아 저겹침 질문에서도 뚜렷한 우위를 보이지 못했고 전체 성능(Hit@1 0.6667)도 가장 낮았다.
 
-> 참고 결과: `outputs/tables/cp09_error_cases.csv`, `outputs/tables/cp01_validation_overlap.csv`
+> 참고 결과: `results/tables/cp09_error_cases.csv`, `results/tables/cp01_validation_overlap.csv`
 >
 > (선택) 전체 Validation 질문을 겹침 비율에 따라 두 그룹으로 나누어 추가 비교했다면 발견한 점을 작성하세요: 별도 그룹 분할 비교는 수행하지 않았음.
 
@@ -84,6 +84,6 @@ Validation 60문항에서 TF-IDF가 Hit@1 0.8833, Recall@3 0.9667, MRR@5 0.9167�
 **평가의 한계:** 동일한 Corpus에서 새로운 질문을 평가했다는 점, 데이터 규모와 질문별 단일 정답 문서의 한계를 고려하여 실제 업무 검색에서 추가로 확인할 점을 작성합니다.  
 본 실험은 200개 문단의 소규모 고정 Corpus를 그대로 둔 채 Test 20문항만 새로 평가했으므로 통계적 신뢰구간이 넓고, 수만~수백만 문서 규모에서 발생하는 유사 문서 간섭과 인덱싱·응답 지연(latency)을 반영하지 못한다. 또한 모든 문단을 정답 주변 500자로 균일하게 자르고 질문당 정답 문단도 1개로 고정한 통제 조건이므로, 실제 업무 적용 전에는 ① 길이가 불균일한 원본 문서와 다중 정답·정답 없음 질의가 포함된 실무 도메인 평가셋 구축, ② 오타·약어·구어체·의역 질문 비율 측정, ③ TF-IDF 단독 대비 SBERT 결합 하이브리드 검색의 정확도와 실제 CPU/GPU 응답 시간 실측을 추가로 검증해야 한다.
 
-> 참고 결과: `outputs/tables/cp10_validation_test_comparison.csv`, `outputs/tables/cp10_test_query_results.csv`, `outputs/reports/cp10_final_report.json`
+> 참고 결과: `results/tables/cp10_validation_test_comparison.csv`, `results/tables/cp10_test_query_results.csv`, `results/reports/cp10_final_report.json`
 >
 > Test 결과를 확인한 뒤 검색 방식을 다시 선택하지 않습니다. 활용 목적·우선 지표·최종 검색 방식의 선택 근거는 `ADR.md`의 NLP 의사결정에 작성합니다.

@@ -37,4 +37,4 @@
 - **트레이드오프(다른 방식과 비교해 얻은 장점과 감수한 단점):** 고유명사·숫자·핵심 어휘가 본문과 겹치는 사실 확인형 질문에서 가장 높은 정확도(`Recall@3 0.9667`)와 단순한 구성(별도 신경망 추론 불필요)을 얻었다. 대신 QV018(겹침 0.158)과 QV035(겹침 0.278)처럼 본문 표현을 다른 말로 풀어 쓴 의역 질문에서는 Sentence-BERT보다 순위가 밀리는 단점을 감수했다.
 - **추후 확인할 점(실제 사용 데이터, 검색 처리 비용 등):** 실제 서비스 환경의 대용량 문서(수만 건 이상)와 의역·오타·약어가 많은 도메인 질의에서의 성능 변화, CPU/GPU 환경별 실제 쿼리 응답 시간(latency) 및 인덱싱 비용, 그리고 TF-IDF와 Sentence-BERT를 결합한 하이브리드 검색(또는 2단계 재정렬)의 효용을 추가로 검증해야 한다.
 
-**분석 근거:** `02_nlp_data_analysis.md`, `02_nlp_model_analysis.md`의 3~4절, `outputs/reports/cp09_selection.json`
+**분석 근거:** `02_nlp_data_analysis.md`, `02_nlp_model_analysis.md`의 3~4절, `results/reports/cp09_selection.json`
