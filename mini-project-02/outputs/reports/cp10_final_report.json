@@ -1,0 +1,18 @@
+{
+  "selected_method": "tfidf",
+  "priority_metric": "recall3",
+  "use_case": "사용자가 한국어 문서 집합에서 사실 확인형 질문을 입력했을 때 정답이 담긴 근거 문단 상위 3건을 빠르게 제공하는 문서 검색 및 RAG 1차 검색기",
+  "selection_reason": "Validation 60문항에서 TF-IDF가 Hit@1 0.883, Recall@3 0.967, MRR@5 0.917로 Sentence-BERT(0.767/0.883/0.821)와 일반 BERT(0.667/0.833/0.759)를 모든 지표에서 앞섰다. Sentence-BERT는 QV018과 QV035처럼 어휘 겹침이 낮은 의역 질문에서 1위를 맞히는 강점이 있었으나 전체 Recall@3가 0.083 낮았고, 일반 BERT는 문장 유사도 학습이 없어 변별력이 가장 낮았다. 따라서 현재 코퍼스에서는 우선 지표인 Recall@3가 가장 높은 TF-IDF를 최종 검색기로 선정하되, 향후 어휘 겹침이 낮은 질의가 늘어나면 SBERT와의 하이브리드 검색을 검토할 필요가 있다.",
+  "validation_metrics": {
+    "hit1": 0.8833333333333333,
+    "recall3": 0.9666666666666667,
+    "mrr5": 0.9166666666666666
+  },
+  "test_metrics": {
+    "hit1": 0.8,
+    "recall3": 0.8,
+    "mrr5": 0.8125
+  },
+  "num_validation_queries": 60,
+  "num_test_queries": 20
+}

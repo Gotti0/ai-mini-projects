@@ -16,3 +16,7 @@ checkpoints/
 
 # 강사용 완성코드
 *_completion.ipynb
+
+# 대용량 임베딩 캐시
+**/outputs/cache/
+*.npy
